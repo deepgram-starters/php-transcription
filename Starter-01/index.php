@@ -117,6 +117,10 @@ if (strpos($uri, "/api") === 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 error_log("No file uploaded or error occurred.");
             }
+            // You might want to send an appropriate response to the client here
+            header('Content-Type: application/json', true, 400); // Bad Request status code
+            echo json_encode(array('error' => 'Invalid data format'));
+            exit();
         }
         
         // Send a JSON response
