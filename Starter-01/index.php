@@ -65,10 +65,25 @@ if (strpos($uri, "/api") === 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $innerResponse = null;
 
+        $requestUrl ='https://api.deepgram.com/v1/listen';
+        $urlParams = ''; // Initialize the variable
+
+        if (!empty($features)) {
+            $featuresArray = json_decode($features, true);
+            foreach ($featuresArray as $key => $value) {
+                $urlParams .= '&' . urlencode($key) . '=' . ($value === true ? 'true' : urlencode($value));
+            }
+            $requestUrl .= '?' . ltrim($urlParams, '&');
+        }
+
+
+        error_log("Request URL: " . $requestUrl);
+
+
         if ($url == null) {
             // process the file
         } else{
-            $response = $client->request('POST', 'https://api.deepgram.com/v1/listen?filler_words=false&summarize=v2', [
+            $response = $client->request('POST', $requestUrl, [
                 'body' => '{"url": "' . $url . '"}',
                 'headers' => [
                   'Authorization' => 'Token ef28b55bf8071b0813546491b80b0939602e2789',
