@@ -16,32 +16,23 @@ Follow these steps to get started with this starter application.
 
 Go to GitHub and [clone the repository](https://github.com/deepgram-starters/deepgram-python-starters).
 
+#### Install php
+
+If you haven't already, you need to install PHP on your system. You can download and install it by following the instructions on the PHP website: https://www.php.net/manual/en/install.php
+
+
+#### Install composer
+
+If you haven't already, you need to install Composer on your system. You can download and install it by following the instructions on the Composer website: https://getcomposer.org/download/
+
+
 #### Install dependencies
 
 Use composer to install the project dependencies in the `Starter 01` directory.
 
-If you haven't already, you need to install Composer on your system. You can download and install it by following the instructions on the Composer website: https://getcomposer.org/download/
-
 ```bash
 cd ./Starter-01
 composer install
-```
-
-Here's how to install maven on [Mac](https://www.baeldung.com/install-maven-on-windows-linux-mac) and [Windows](https://www.baeldung.com/install-maven-on-windows-linux-mac).
-
-If you use homebrew, you can install maven with the following command:
-
-```bash
-brew install maven
-```
-
-#### Install dependencies
-
-Install the project dependencies in the `Starter 01` directory.
-
-```bash
-cd ./Starter-01
-mvn compile
 ```
 
 #### Edit the config file
@@ -49,7 +40,7 @@ mvn compile
 Copy the text from `.env-sample` and create a new file called `.env`. Paste in the code and enter your API key you generated in the [Deepgram console](https://console.deepgram.com/).
 
 ```bash
-port=5000
+port=8080
 deepgram_api_key=api_key
 ```
 
@@ -58,5 +49,5 @@ deepgram_api_key=api_key
 Once running, you can [access the application in your browser](http://localhost:8080/).
 
 ```bash
-mvn exec:java -Dexec.mainClass="App"
+php -S localhost:8080
 ```
