@@ -49,5 +49,5 @@ deepgram_api_key=api_key
 Once running, you can [access the application in your browser](http://localhost:8080/).
 
 ```bash
-php -S localhost:8080
+php -S localhost:8080 -d post_max_size=200M -d upload_max_filesize=200M
 ```

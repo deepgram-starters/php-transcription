@@ -1,8 +1,5 @@
 <?php
 
-// Increasing post_max_size and upload_max_filesize
-ini_set('post_max_size', '160M');
-
 require_once('vendor/autoload.php');
 
 
