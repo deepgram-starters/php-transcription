@@ -1,9 +1,17 @@
 <?php
+
+
+require_once('vendor/autoload.php');
+
+
 // index.php
 
 $uri = $_SERVER['REQUEST_URI'];
 
-require_once('vendor/autoload.php');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$DG_KEY = $_ENV['deepgram_api_key'];
 
 $client = new \GuzzleHttp\Client();
 
@@ -56,6 +64,7 @@ if (strpos($uri, "/api") === 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $features = isset($_POST['features']) ? $_POST['features'] : null;
         $tier = isset($_POST['tier']) ? $_POST['tier'] : null;
         $url = isset($_POST['url']) ? $_POST['url'] : null;
+        $uploadedFile = isset($_FILES['file']) ? $_FILES['file'] : null;
         
         // Process the data as needed
         error_log("Model: " . $model);
@@ -80,13 +89,31 @@ if (strpos($uri, "/api") === 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
         error_log("Request URL: " . $requestUrl);
 
 
-        if ($url == null) {
+        if ($url == null && $uploadedFile !== null && $uploadedFile['error'] === UPLOAD_ERR_OK) {
             // process the file
-        } else{
+            $uploadedFilePath = $uploadedFile['tmp_name'];
+            // Read the raw audio from the uploaded file
+            $rawAudio = file_get_contents($uploadedFilePath);
+
+            $payload = ["RAW_BODY" => $rawAudio];
+            $headers = [
+                "accept" => "application/json",
+                "content-type" => "audio/wave",
+                "Authorization" => "Token " . $DG_KEY
+            ];
+
+            $response = $client->request('POST', $requestUrl, [
+                'body' => $rawAudio,
+                'headers' => $headers
+            ]);
+
+            // Decode the inner JSON response
+            $innerResponse = json_decode($response->getBody()->getContents(), true);
+        } else if ($url !== null){
             $response = $client->request('POST', $requestUrl, [
                 'body' => '{"url": "' . $url . '"}',
                 'headers' => [
-                  'Authorization' => 'Token ef28b55bf8071b0813546491b80b0939602e2789',
+                  'Authorization' => 'Token ' . $DG_KEY,
                   'accept' => 'application/json',
                   'content-type' => 'application/json',
                 ],
