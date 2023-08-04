@@ -1,5 +1,7 @@
 <?php
 
+// Increasing post_max_size and upload_max_filesize
+ini_set('post_max_size', '160M');
 
 require_once('vendor/autoload.php');
 
@@ -44,10 +46,6 @@ function getMimeTypeForFile($uri) {
 // Remove "/static" from the file path construction
 $filePath = "./static" . $uri;
 
-// Log the requested file and its file path
-error_log("Requested File: " . $uri);
-error_log("File Path: " . $filePath);
-
 if (file_exists($filePath)) {
     $mimeType = getMimeTypeForFile($uri);
     header("Content-Type: " . $mimeType);
@@ -66,11 +64,6 @@ if (strpos($uri, "/api") === 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $url = isset($_POST['url']) ? $_POST['url'] : null;
         $uploadedFile = isset($_FILES['file']) ? $_FILES['file'] : null;
         
-        // Process the data as needed
-        error_log("Model: " . $model);
-        error_log("Features: " . $features);
-        error_log("Tier: " . $tier);
-        error_log("URL: " . $url);
 
         $innerResponse = null;
 
@@ -86,12 +79,10 @@ if (strpos($uri, "/api") === 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
 
-        error_log("Request URL: " . $requestUrl);
-
-
         if ($url == null && $uploadedFile !== null && $uploadedFile['error'] === UPLOAD_ERR_OK) {
             // process the file
             $uploadedFilePath = $uploadedFile['tmp_name'];
+            
             // Read the raw audio from the uploaded file
             $rawAudio = file_get_contents($uploadedFilePath);
 
@@ -120,6 +111,12 @@ if (strpos($uri, "/api") === 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
               ]);
             // Decode the inner JSON response
             $innerResponse = json_decode($response->getBody()->getContents(), true);
+        } else{
+            if ($uploadedFile !== null) {
+                error_log("File upload error: " . $uploadedFile['error']);
+            } else {
+                error_log("No file uploaded or error occurred.");
+            }
         }
         
         // Send a JSON response
