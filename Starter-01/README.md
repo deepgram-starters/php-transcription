@@ -1,6 +1,6 @@
 # Deepgram PHP Starter
 
-This sample demonstrates interacting with the Deepgram API from a PHP server. It uses the Deepgram API to handle API calls, and has a React companion application to interact with the PHP integration.
+This sample demonstrates interacting with the Deepgram API from a PHP server. It uses the Deepgram API to handle API calls, and has a javascript client built from web components.
 
 ## Sign-up to Deepgram
 
@@ -20,11 +20,15 @@ Go to GitHub and [clone the repository](https://github.com/deepgram-starters/dee
 
 If you haven't already, you need to install PHP on your system. You can download and install it by following the instructions on the PHP website: https://www.php.net/manual/en/install.php
 
-
 #### Install composer
 
 If you haven't already, you need to install Composer on your system. You can download and install it by following the instructions on the Composer website: https://getcomposer.org/download/
 
+If you use homebrew, you can install composer with the following command:
+
+```bash
+brew install composer
+```
 
 #### Install dependencies
 
