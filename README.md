@@ -1,5 +1,7 @@
 # Deepgram PHP Starters
 
+[![Discord](https://dcbadge.vercel.app/api/server/xWRaCDBtW4?style=flat)](https://discord.gg/xWRaCDBtW4)
+
 Please check out the starters contained in this repository for examples of how to build Deepgram into your PHP-based applications. The starters can be found in their own directories.
 
 - [Deepgram PHP Starter](./Starter-01/README.md)
