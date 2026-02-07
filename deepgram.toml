@@ -2,8 +2,9 @@
 title = "PHP Transcription Starter"
 description = "Get started using Deepgram's Transcription with this PHP demo app"
 author = "Deepgram DX Team <devrel@deepgram.com> (https://developers.deepgram.com)"
-useCase = "STT"
-language = "PHP"
+useCase = "transcription"
+language = "php"
+tags = ["transcription", "stt", "speech-to-text", "asr", "pre-recorded", "php"]
 
 [build]
 command = "composer install"
