@@ -30,7 +30,7 @@ command = ["test -f .env || (echo 'Error: .env not found. Run: cp sample.env .en
 message = "Environment validated"
 
 [start]
-command = ["php -S 0.0.0.0:8081 server.php", "cd frontend && pnpm run dev -- --port 8080 --no-open"]
+command = ["php -c php.ini -S 0.0.0.0:8081 server.php", "cd frontend && pnpm run dev -- --port 8080 --no-open"]
 parallel = true
 message = "Application running on http://localhost:8080"
 

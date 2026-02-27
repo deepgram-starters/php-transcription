@@ -4,7 +4,7 @@
     "type": "project",
     "require": {
         "php": ">=8.3",
-        "firebase/php-jwt": "6.10.2",
+        "firebase/php-jwt": "^7.0",
         "vlucas/phpdotenv": "5.6.1",
         "yosymfony/toml": "1.0.4"
     }

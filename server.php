@@ -251,7 +251,7 @@ function callDeepgramTranscription(array $dgRequest, string $model, string $apiK
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $curlError = curl_error($ch);
-    curl_close($ch);
+    // curl_close() deprecated since PHP 8.5 (no-op since 8.0) — handle destroyed automatically
 
     if ($curlError) {
         return [
