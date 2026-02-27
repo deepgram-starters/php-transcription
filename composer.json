@@ -1,6 +1,11 @@
 {
+    "name": "deepgram/php-transcription",
+    "description": "PHP Transcription Starter powered by Deepgram",
+    "type": "project",
     "require": {
-        "guzzlehttp/guzzle": "^7.0",
-        "vlucas/phpdotenv": "^5.0"
+        "php": ">=8.3",
+        "firebase/php-jwt": "6.10.2",
+        "vlucas/phpdotenv": "5.6.1",
+        "yosymfony/toml": "1.0.4"
     }
 }
